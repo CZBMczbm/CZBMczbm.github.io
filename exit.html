@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="3; url=https://www.kmmc.cn/">
+  <title>跳转界面 / 正在进入昆明医科大学</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      position: relative;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+      overflow: hidden;
+      padding: 24px;
+      background: #121212;
+      color: #FFF3D8;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      text-align: center;
+    }
+    .panel {
+      position: fixed;
+      top: -15%;
+      bottom: -15%;
+      width: 56%;
+      transform: skewX(-14deg);
+    }
+    .panel.red { left: 18%; background: #C8332D; }
+    .panel.cream { right: -20%; background: #F3E8D0; opacity: .96; }
+    .panel.black { left: -20%; background: #121212; }
+    main { position: relative; z-index: 2; width: min(700px, 100%); }
+    .tag {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 6px 10px;
+      background: #F6C900;
+      border: 2px solid #121212;
+      color: #121212;
+      font-family: Consolas, monospace;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      transform: rotate(-2deg);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 8vw, 92px);
+      line-height: .9;
+      letter-spacing: -.08em;
+      text-shadow: 5px 5px 0 #C8332D;
+    }
+    h1 em { color: #F6C900; font-style: normal; }
+    p {
+      margin: 18px 0 0;
+      color: rgba(255, 243, 216, .68);
+      font-family: Consolas, monospace;
+      font-size: 10px;
+      letter-spacing: .06em;
+      line-height: 1.8;
+    }
+    .track {
+      width: min(390px, 78vw);
+      height: 12px;
+      margin: 20px auto 14px;
+      padding: 2px;
+      border: 2px solid #FFF3D8;
+      background: #121212;
+    }
+    .track span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: #F6C900;
+      animation: load 2.4s cubic-bezier(.5,0,.2,1) forwards;
+    }
+    @keyframes load { to { width: 100%; } }
+    .go {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 11px 17px;
+      background: #F6C900;
+      border: 2px solid #121212;
+      box-shadow: 4px 4px 0 #C8332D;
+      color: #121212;
+      font-size: 12px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .fine {
+      margin-top: 20px;
+      color: rgba(255, 243, 216, .42);
+      font-size: 8px;
+    }
+  </style>
+</head>
+<body>
+  <span class="panel black" aria-hidden="true"></span>
+  <span class="panel red" aria-hidden="true"></span>
+  <span class="panel cream" aria-hidden="true"></span>
+  <main>
+    <span class="tag">RESEARCH GATE / TRANSFER</span>
+    <h1>正在进入<br><em>昆明医科大学。</em></h1>
+    <p>奶医学研究已完成。跳转界面将在几秒后自动关闭。</p>
+    <div class="track" aria-hidden="true"><span></span></div>
+    <a class="go" href="https://www.kmmc.cn/">立即进入 ↗</a>
+    <p class="fine">中国奶娃医科大学为非官方粉丝整活站，与昆明医科大学无隶属关系。</p>
+  </main>
+  <script>window.setTimeout(function(){ window.location.replace('https://www.kmmc.cn/'); }, 2400);</script>
+</body>
+</html>
