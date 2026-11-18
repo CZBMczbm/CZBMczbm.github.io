@@ -3140,19 +3140,47 @@ ol, ul {
 
 /* ---------- hero photo ---------- */
 
-.doctor-photo {
+.doctor-card {
   position: absolute;
+  right: 30px;
   bottom: 24px;
-  left: 51%;
   z-index: 3;
-  width: auto;
-  max-width: 78%;
-  height: 90%;
-  transform: translateX(-50%);
-  filter: drop-shadow(11px 11px 0 rgba(18, 18, 18, 0.95));
+  width: clamp(240px, 48%, 360px);
+  margin: 0;
+  padding: 0;
+  background: #FFFDF7;
+  border: 3px solid #121212;
+  box-shadow: 12px 12px 0 #121212;
+  transform: rotate(-2.5deg);
   animation: mascotBob 5.5s ease-in-out infinite;
   user-select: none;
   pointer-events: none;
+}
+
+.doctor-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.doctor-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  background: #121212;
+  color: #FFF3D8;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-top: 3px solid #121212;
+}
+
+.doctor-card figcaption b {
+  color: var(--yellow);
+  font-weight: 700;
 }
 
 /* ---------- research ---------- */
@@ -3669,16 +3697,46 @@ ol, ul {
   min-height: 430px;
 }
 
-.go-art img {
+.nurse-card {
   position: absolute;
-  right: -10px;
-  bottom: -12px;
+  right: 8px;
+  bottom: -4px;
   z-index: 2;
-  width: 390px;
-  max-width: 100%;
-  height: auto;
-  filter: drop-shadow(10px 10px 0 var(--black));
+  width: clamp(240px, 30vw, 350px);
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 0;
+  background: #FFFDF7;
+  border: 3px solid var(--black);
+  box-shadow: 10px 10px 0 var(--black);
+  transform: rotate(2deg);
   animation: mascotBob 5.7s ease-in-out infinite;
+}
+
+.nurse-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nurse-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-top: 3px solid var(--black);
+}
+
+.nurse-card figcaption b {
+  color: var(--yellow);
+  font-weight: 700;
 }
 
 .go-bubble {
@@ -3745,7 +3803,7 @@ ol, ul {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
   gap: 36px;
-  align-items: end;
+  align-items: start;
   margin-bottom: 32px;
 }
 
@@ -3762,12 +3820,70 @@ ol, ul {
   font-style: normal;
 }
 
-.game-head > p {
+.game-head-copy {
+  padding-top: 4px;
+}
+
+.game-intro {
+  max-width: 620px;
+  margin-top: 20px;
   padding-top: 12px;
   border-top: 1px solid rgba(255, 243, 216, 0.38);
   color: rgba(255, 243, 216, 0.6);
   font-size: 12px;
   line-height: 1.9;
+}
+
+.game-poster {
+  position: relative;
+  width: 100%;
+  max-width: 190px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  background: #0B0B0B;
+  border: 3px solid var(--cream);
+  box-shadow: 10px 10px 0 var(--red);
+  transform: rotate(1.5deg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.game-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.game-poster figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-top: 3px solid var(--cream);
+}
+
+.game-poster figcaption b {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+[data-naiwa-sound] {
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-naiwa-sound]:hover,
+[data-naiwa-sound]:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
 }
 
 .game-frame {
@@ -4198,8 +4314,13 @@ ol, ul {
     font-size: clamp(36px, 9.8vw, 48px);
   }
 
-  .game-head > p {
+  .game-intro {
     font-size: 11px;
+  }
+
+  .game-poster {
+    max-width: 170px;
+    margin: 0 0 0 auto;
   }
 
   .game-hud {
@@ -4260,4 +4381,127 @@ ol, ul {
   .go-stripes {
     animation: none !important;
   }
+}
+
+
+/* ---------- portrait cards responsive ---------- */
+
+@media (max-width: 680px) {
+  .doctor-card {
+    right: 14px;
+    bottom: 18px;
+    width: clamp(190px, 48%, 240px);
+  }
+
+  .nurse-card {
+    right: 4px;
+    bottom: 0;
+    width: clamp(230px, 62%, 300px);
+  }
+}
+
+@media (max-width: 420px) {
+  .doctor-card {
+    right: 10px;
+    width: 190px;
+  }
+
+  .nurse-card {
+    width: 220px;
+  }
+}
+
+
+/* ---------- naiwa sound feedback ---------- */
+
+.sound-pop {
+  position: fixed;
+  z-index: 9999;
+  padding: 8px 12px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--pop-r, -3deg));
+  animation: soundPop 900ms ease-out forwards;
+}
+
+@keyframes soundPop {
+  0% { opacity: 0; transform: translate(-50%, -35%) scale(0.65) rotate(var(--pop-r, -3deg)); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1.06) rotate(var(--pop-r, -3deg)); }
+  100% { opacity: 0; transform: translate(-50%, -150%) scale(1) rotate(var(--pop-r, -3deg)); }
+}
+
+@media (max-width: 680px) {
+  .game-poster {
+    max-width: 140px;
+  }
+
+  .sound-pop {
+    font-size: 13px;
+  }
+}
+
+
+/* ---------- transparent doctor cutout ---------- */
+
+.doctor-cutout {
+  position: absolute;
+  bottom: 20px;
+  left: 51%;
+  z-index: 3;
+  width: auto;
+  max-width: 78%;
+  height: 88%;
+  transform: translateX(-50%);
+  filter: drop-shadow(11px 11px 0 rgba(18, 18, 18, 0.95));
+  animation: mascotBob 5.5s ease-in-out infinite;
+  user-select: none;
+}
+
+.doctor-cutout:hover,
+.doctor-cutout:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
+}
+
+@media (max-width: 680px) {
+  .doctor-cutout {
+    height: 90%;
+    bottom: 16px;
+  }
+}
+
+
+/* ---------- clock entry ---------- */
+
+.clock-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 243, 216, 0.35);
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.clock-entry span {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.clock-entry:hover,
+.clock-entry:focus-visible {
+  color: var(--cream);
+  border-color: var(--cream);
 }

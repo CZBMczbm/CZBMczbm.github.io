@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>最终提问｜中国奶娃医科大学</title>
+  <meta name="description" content="时间门最终提问：谁是最可爱的生物？">
+  <meta name="theme-color" content="#080812">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/space/cz10.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/audio/andi.mp3" as="audio" type="audio/mpeg">
+  <link rel="stylesheet" href="clock.css">
+</head>
+<body class="question-page">
+
+  <div class="cz10-bg" aria-hidden="true"></div>
+  <div class="cz10-shade" aria-hidden="true"></div>
+
+  <div class="page-geometry" aria-hidden="true">
+    <span class="geo geo--red"></span>
+    <span class="geo geo--cream"></span>
+    <span class="geo geo--yellow"></span>
+    <span class="geo geo--black"></span>
+    <span class="geo geo--grid"></span>
+    <span class="geo geo--cross">+</span>
+    <span class="geo geo--line"></span>
+  </div>
+
+  <header class="clock-top">
+    <a class="clock-brand" href="index.html" aria-label="返回中国奶娃医科大学首页">
+      <span class="clock-brand__mark">十</span>
+      <span>
+        <strong>中国奶娃医科大学</strong>
+        <small>TIME GATE / 最终提问</small>
+      </span>
+    </a>
+    <a class="clock-back" href="index.html">返回主界面 ↗</a>
+  </header>
+
+  <main class="question-stage is-in" id="questionStage">
+    <div class="question-inner">
+      <div class="question-card">
+        <div class="question-kicker">FINAL QUESTION / 时间到了</div>
+        <h2 id="questionTitle">谁，是<br><em>最可爱的生物？</em></h2>
+        <p class="question-copy">时间门只允许一个答案通过。请写下你想到的生物。</p>
+
+        <form class="answer-form" id="answerForm" autocomplete="off">
+          <label class="sr-only" for="answerInput">你的答案</label>
+          <input id="answerInput" name="answer" type="text" placeholder="输入答案……" maxlength="40" spellcheck="false" enterkeyhint="send">
+          <button type="submit">提交答案 <span>↗</span></button>
+        </form>
+
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+
+        <div class="question-foot">
+          <span>提示：答案不止一个。</span>
+          <a href="index.html">放弃，返回主界面 ↗</a>
+        </div>
+      </div>
+
+      <aside class="question-side" aria-hidden="true">
+        <div class="side-stamp">时间<br><b>已到</b><small>TIME'S UP</small></div>
+        <div class="side-geometry">
+          <span class="side-geometry__red"></span>
+          <span class="side-geometry__black"></span>
+          <span class="side-geometry__yellow"></span>
+          <span class="side-geometry__label">CZ-10<br><small>FIRST FLIGHT / 202X</small></span>
+        </div>
+        <div class="side-meta">
+          <span>NAIWA MEDICAL UNIVERSITY</span>
+          <span>TEMPORAL DIVISION / 2026</span>
+          <span>NO. 001 / ONE ANSWER ONLY</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="sr-only" id="announcer" role="status" aria-live="assertive"></div>
+
+  <script src="clock.js"></script>
+</body>
+</html>

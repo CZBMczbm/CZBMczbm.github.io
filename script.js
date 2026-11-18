@@ -217,16 +217,14 @@
     let W = canvas.width;
     let H = canvas.height;
     let GROUND = H - 40;
-    const sprite = new Image();
-    sprite.src = 'assets/naiwa-nurse-2.webp';
 
     const state = {
       mode: 'idle',
       score: 0,
       best: 0,
-      speed: 4.3,
+      speed: 3.8,
       frame: 0,
-      spawnIn: 95,
+      spawnIn: 110,
       obstacles: [],
       player: { x: 92, y: 0, w: 74, h: 94, vy: 0, onGround: true },
     };
@@ -234,7 +232,7 @@
     const sizeCanvas = () => {
       const mobile = window.innerWidth < 700;
       canvas.width = mobile ? 700 : 1000;
-      canvas.height = mobile ? 440 : 300;
+      canvas.height = mobile ? 500 : 340;
       W = canvas.width;
       H = canvas.height;
       GROUND = H - 40;
@@ -259,9 +257,9 @@
     const resetGame = () => {
       state.mode = 'idle';
       state.score = 0;
-      state.speed = 4.3;
+      state.speed = 3.8;
       state.frame = 0;
-      state.spawnIn = 95;
+      state.spawnIn = 110;
       state.obstacles = [];
       state.player.y = GROUND - state.player.h;
       state.player.vy = 0;
@@ -275,9 +273,9 @@
     const startGame = () => {
       state.mode = 'running';
       state.score = 0;
-      state.speed = 4.3;
+      state.speed = 3.8;
       state.frame = 0;
-      state.spawnIn = 80;
+      state.spawnIn = 95;
       state.obstacles = [];
       state.player.y = GROUND - state.player.h;
       state.player.vy = 0;
@@ -295,7 +293,7 @@
         return;
       }
       if (state.mode !== 'running' || !state.player.onGround) return;
-      state.player.vy = -13.5;
+      state.player.vy = -15.0;
       state.player.onGround = false;
     };
 
@@ -335,10 +333,10 @@
 
     const update = () => {
       state.frame += 1;
-      state.speed = 4.3 + Math.min(2.8, state.score * 0.04);
+      state.speed = 3.8 + Math.min(2.2, state.score * 0.03);
 
       const p = state.player;
-      p.vy += 0.58;
+      p.vy += 0.52;
       p.y += p.vy;
       if (p.y >= GROUND - p.h) {
         p.y = GROUND - p.h;
@@ -349,7 +347,7 @@
       state.spawnIn -= 1;
       if (state.spawnIn <= 0) {
         spawn();
-        state.spawnIn = Math.max(60, 98 - Math.floor(state.score / 4) * 2) + Math.floor(Math.random() * 22);
+        state.spawnIn = Math.max(72, 112 - Math.floor(state.score / 5) * 2) + Math.floor(Math.random() * 20);
       }
 
       const playerRect = { x: p.x, y: p.y, w: p.w, h: p.h };
@@ -411,12 +409,88 @@
 
     const drawPlayer = () => {
       const p = state.player;
-      if (sprite.complete && sprite.naturalWidth) {
-        ctx.drawImage(sprite, p.x, p.y, p.w, p.h);
-      } else {
-        ctx.fillStyle = '#F6C900';
-        ctx.fillRect(p.x, p.y, p.w, p.h);
-      }
+      const w = p.w;
+      const h = p.h;
+      const bob = state.mode === 'running' ? Math.sin(state.frame * 0.16) * 1.6 : 0;
+
+      ctx.save();
+      ctx.translate(p.x, p.y + bob);
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      ctx.strokeStyle = '#6B4F1F';
+      ctx.lineWidth = Math.max(5, w * 0.08);
+      ctx.beginPath();
+      ctx.moveTo(w * 0.36, h * 0.78);
+      ctx.lineTo(w * 0.33, h * 0.97);
+      ctx.moveTo(w * 0.64, h * 0.78);
+      ctx.lineTo(w * 0.67, h * 0.97);
+      ctx.stroke();
+
+      ctx.fillStyle = '#5C4318';
+      ctx.beginPath();
+      ctx.ellipse(w * 0.29, h * 0.985, w * 0.13, h * 0.035, -0.1, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.71, h * 0.985, w * 0.13, h * 0.035, 0.1, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#F6C900';
+      ctx.strokeStyle = '#121212';
+      ctx.lineWidth = Math.max(2, w * 0.028);
+      ctx.beginPath();
+      ctx.ellipse(w * 0.5, h * 0.64, w * 0.33, h * 0.29, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#FFFDF5';
+      ctx.beginPath();
+      ctx.moveTo(w * 0.27, h * 0.53);
+      ctx.lineTo(w * 0.73, h * 0.53);
+      ctx.lineTo(w * 0.83, h * 0.8);
+      ctx.lineTo(w * 0.17, h * 0.8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#C8332D';
+      ctx.beginPath();
+      ctx.arc(w * 0.5, h * 0.59, w * 0.025, 0, Math.PI * 2);
+      ctx.arc(w * 0.5, h * 0.66, w * 0.025, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#F6C900';
+      ctx.beginPath();
+      ctx.ellipse(w * 0.5, h * 0.3, w * 0.27, h * 0.22, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.ellipse(w * 0.41, h * 0.27, w * 0.07, h * 0.055, 0, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.59, h * 0.27, w * 0.07, h * 0.055, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#121212';
+      ctx.beginPath();
+      ctx.arc(w * 0.42, h * 0.275, w * 0.035, 0, Math.PI * 2);
+      ctx.arc(w * 0.58, h * 0.275, w * 0.035, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#FFFDF5';
+      ctx.strokeStyle = '#121212';
+      ctx.lineWidth = Math.max(1.6, w * 0.022);
+      ctx.beginPath();
+      ctx.moveTo(w * 0.25, h * 0.19);
+      ctx.quadraticCurveTo(w * 0.5, h * 0.05, w * 0.75, h * 0.19);
+      ctx.lineTo(w * 0.72, h * 0.24);
+      ctx.lineTo(w * 0.28, h * 0.24);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#C8332D';
+      ctx.fillRect(w * 0.475, h * 0.085, w * 0.05, h * 0.09);
+      ctx.fillRect(w * 0.445, h * 0.105, w * 0.11, h * 0.035);
+
+      ctx.restore();
     };
 
     const draw = () => {
@@ -485,6 +559,122 @@
     sizeCanvas();
     resetGame();
   }
+
+  /* ---------------- naiwa voice easter egg ---------------- */
+
+  const naiwaVoices = [
+    { src: 'assets/audio/andi.mp3', text: '安迪！' },
+    { src: 'assets/audio/mai.mp3', text: '嘎嘎滴辣虾！' },
+    { src: 'assets/audio/ganbadie.mp3', text: '干巴蝶！' },
+  ].map((item) => {
+    const audio = new Audio(item.src);
+    audio.preload = 'auto';
+    audio.volume = 0.9;
+    audio.load();
+    return { ...item, audio };
+  });
+
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  const audioBuffers = new Map();
+  let audioCtx = null;
+  let lastVoiceIndex = -1;
+
+  const loadVoiceBuffer = async (voice) => {
+    if (!audioCtx) return;
+    try {
+      const response = await fetch(voice.src);
+      const data = await response.arrayBuffer();
+      const buffer = await audioCtx.decodeAudioData(data);
+      audioBuffers.set(voice.src, buffer);
+    } catch (error) {
+      // HTMLAudio fallback 仍然可用
+    }
+  };
+
+  const initNaiwaAudio = () => {
+    if (!AudioContextClass) return;
+    if (!audioCtx) {
+      try {
+        audioCtx = new AudioContextClass();
+        naiwaVoices.forEach(loadVoiceBuffer);
+      } catch (error) {
+        audioCtx = null;
+      }
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+  };
+
+  // 提前创建 context / 解码，第一次点击就能直接播放。
+  initNaiwaAudio();
+  document.addEventListener('pointerdown', initNaiwaAudio, { once: true, passive: true });
+  document.addEventListener('keydown', initNaiwaAudio, { once: true });
+
+  const playHtmlAudio = (voice) => {
+    naiwaVoices.forEach((item) => {
+      item.audio.pause();
+      try { item.audio.currentTime = 0; } catch (error) { /* ignore */ }
+    });
+    try {
+      const promise = voice.audio.play();
+      if (promise) promise.catch(() => {});
+    } catch (error) {
+      // 某些浏览器会拦截，Web Audio 路径会接管
+    }
+  };
+
+  const showSoundPop = (x, y, text) => {
+    const pop = document.createElement('span');
+    pop.className = 'sound-pop';
+    pop.textContent = text;
+    pop.style.left = `${x}px`;
+    pop.style.top = `${y}px`;
+    pop.style.setProperty('--pop-r', `${(Math.random() * 8 - 4).toFixed(2)}deg`);
+    document.body.appendChild(pop);
+    pop.addEventListener('animationend', () => pop.remove(), { once: true });
+    window.setTimeout(() => pop.remove(), 1100);
+  };
+
+  const playNaiwaVoice = (event) => {
+    let index = Math.floor(Math.random() * naiwaVoices.length);
+    if (index === lastVoiceIndex) index = (index + 1) % naiwaVoices.length;
+    lastVoiceIndex = index;
+
+    const voice = naiwaVoices[index];
+    initNaiwaAudio();
+
+    const buffer = audioBuffers.get(voice.src);
+    if (audioCtx && buffer) {
+      audioCtx.resume().then(() => {
+        const source = audioCtx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioCtx.destination);
+        source.start(0);
+      }).catch(() => playHtmlAudio(voice));
+    } else {
+      playHtmlAudio(voice);
+    }
+
+    let x = event.clientX;
+    let y = event.clientY;
+    if (!x && !y) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      x = rect.left + rect.width / 2;
+      y = rect.top + rect.height / 2;
+    }
+    showSoundPop(x, y, voice.text);
+  };
+
+  document.querySelectorAll('[data-naiwa-sound]').forEach((element) => {
+    element.addEventListener('click', playNaiwaVoice);
+    element.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        playNaiwaVoice(event);
+      }
+    });
+  });
 
   /* ---------------- footer year ---------------- */
 

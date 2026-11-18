@@ -22,8 +22,13 @@
   <meta name="twitter:description" content="六个科室，一本正经地瞎编。样本只有一只奶龙。">
   <meta name="twitter:image" content="https://xn--fiq06jptdmvcilg2ac5e371h.com/assets/og-cover.jpg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/naiwa-nurse-1.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/naiwa-doctor.png" as="image" type="image/png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="timegate.css">
+  <link rel="preload" href="assets/timegate/fair.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/timegate/pop.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/timegate/lying.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/timegate/sitting.webp" as="image" type="image/webp">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -153,12 +158,12 @@
 
           <div class="art-stamp" aria-hidden="true">难绷<br><b>前沿</b><small>NAIWA MEDICAL</small></div>
 
-          <img class="doctor-photo" src="assets/naiwa-nurse-1.webp" alt="戴着护士帽的奶娃" width="639" height="1200">
+          <img class="doctor-cutout" src="assets/naiwa-doctor.png" alt="穿白大褂、挂听诊器的奶娃医生" width="611" height="1190" data-naiwa-sound tabindex="0" role="button" aria-label="点击奶娃医生播放声音" title="点一下，有声音">
 
-          <div class="art-caption">
-            <span>护士长 / 奶娃</span>
-            <b>护士帽已就位</b>
-          </div>
+          <button class="time-emblem" type="button" data-timegate aria-label="打开时间门">
+            <span class="time-emblem__clock" aria-hidden="true"></span>
+            <span class="time-emblem__copy"><b>TIME GATE</b><small>点一下，时间落下来</small></span>
+          </button>
           <span class="art-plus art-plus--one" aria-hidden="true">+</span>
           <span class="art-plus art-plus--two" aria-hidden="true">+</span>
         </div>
@@ -465,11 +470,15 @@
             <span class="research-go-copy">点此进入<br><strong>跳转界面 ↗</strong></span>
           </a>
           <p class="go-note">跳转界面 → 目标官网</p>
+          <a class="clock-entry" href="clock.html" data-timegate>或者，先看一眼时间。 <span>↗</span></a>
         </div>
         <div class="go-art">
           <span class="go-stamp" aria-hidden="true">研究<br>继续</span>
           <div class="go-bubble">论文写完了吗？</div>
-          <img src="assets/naiwa-nurse-2.webp" alt="戴着护士帽、挥手的奶娃" width="792" height="953">
+          <figure class="nurse-card" data-naiwa-sound tabindex="0" role="button" aria-label="点击奶娃护士播放声音" title="点一下，有声音">
+            <img src="assets/naiwa-nurse-card.png" alt="戴护士帽、穿护士服的奶娃护士" width="1000" height="944">
+            <figcaption><span>护士站 / 值班奶娃</span><b>ND-002</b></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -477,11 +486,14 @@
     <section class="game-section" id="game" aria-labelledby="gameTitle">
       <div class="container">
         <div class="game-head">
-          <div>
+          <div class="game-head-copy">
             <div class="section-tag section-tag--light"><span>04</span> 小游戏 / MINI GAME</div>
             <h2 id="gameTitle">奶娃快跑，<br><em>别被夜班追上。</em></h2>
+            <p class="game-intro">按空格 / ↑ / 点击画面跳跃。躲开论文、夜班和考试，看看你能撑多久。点一下奶娃，还会随机来一嗓子。</p>
           </div>
-          <p>按空格 / ↑ / 点击画面跳跃。躲开论文、夜班和考试，看看你能撑多久。</p>
+          <figure class="game-poster" data-naiwa-sound tabindex="0" role="button" aria-label="奶娃快跑海报，点击播放声音" title="点一下，有声音">
+            <img src="assets/naiwa-run-poster.jpg" alt="奶娃在夜色中奔跑的海报" width="1280" height="1915">
+          </figure>
         </div>
 
         <div class="game-frame">
@@ -491,7 +503,7 @@
             <span class="game-hint">SPACE / TAP TO JUMP</span>
           </div>
           <div class="game-canvas-wrap" id="gameWrap" tabindex="0" role="application" aria-label="奶娃快跑小游戏，按空格或点击跳跃">
-            <canvas id="gameCanvas" width="1000" height="260"></canvas>
+            <canvas id="gameCanvas" width="1000" height="340"></canvas>
             <div class="game-start" id="gameStart">
               <strong>奶娃快跑</strong>
               <span>按空格 / 点击开始</span>
@@ -551,6 +563,7 @@
         <a href="#go">GO</a>
         <a href="#game">奶娃快跑</a>
         <a href="#about">关于</a>
+        <a href="clock.html" data-timegate>钟表</a>
       </div>
 
       <a class="footer-go" href="exit.html" data-go>
@@ -564,6 +577,86 @@
       <span>所有研究均为虚构 / Made with 奶龙元气</span>
     </div>
   </footer>
+
+  <div class="timegate" id="timegate" hidden aria-hidden="true">
+    <div class="timegate__panels">
+      <div class="timegate__panel timegate__panel--left" id="timegateLeft">
+        <div class="gate-image"></div>
+        <div class="gate-image"></div>
+      </div>
+      <div class="timegate__panel timegate__panel--right" id="timegateRight">
+        <div class="gate-image"></div>
+        <div class="gate-image"></div>
+      </div>
+    </div>
+    <div class="timegate__grain" aria-hidden="true"></div>
+    <div class="timegate__frame" aria-hidden="true"></div>
+
+    <div class="timegate__heading">
+      <span class="timegate__kicker">TIME GATE / TEMPORAL RESEARCH</span>
+      <h2>把时间<em>拧一下。</em></h2>
+    </div>
+
+    <div class="pendulum" id="timegatePendulum">
+      <span class="pendulum__rope" aria-hidden="true"></span>
+      <div class="pendulum__clock" id="timegateClock">
+        <svg class="geo-clock" viewBox="0 0 600 600" role="img" aria-label="几何风格奶娃怀表">
+          <circle cx="300" cy="300" r="284" fill="none" stroke="#121212" stroke-width="2" stroke-dasharray="1 13"/>
+          <polygon points="300,10 445,48 552,155 590,300 552,445 445,552 300,590 155,552 48,445 10,300 48,155 155,48"
+                   fill="#F3E8D0" stroke="#121212" stroke-width="10"/>
+          <polygon points="300,42 429,76 524,171 558,300 524,429 429,524 300,558 171,524 76,429 42,300 76,171 171,76"
+                   fill="none" stroke="#C8332D" stroke-width="4"/>
+          <circle cx="300" cy="300" r="252" fill="#FFF3D8" stroke="#121212" stroke-width="8"/>
+          <circle cx="300" cy="300" r="226" fill="none" stroke="#121212" stroke-width="2" stroke-dasharray="2 9"/>
+          <path d="M300 300 L300 48 A252 252 0 0 1 552 300 Z" fill="#F6C900" opacity=".15"/>
+          <path d="M300 300 L300 552 A252 252 0 0 1 48 300 Z" fill="#C8332D" opacity=".08"/>
+          <circle cx="300" cy="300" r="236" fill="none" stroke="#C8332D" stroke-width="6"
+                  stroke-dasharray="86 38" transform="rotate(-24 300 300)" opacity=".55"/>
+          <g stroke="#121212" stroke-width="5" stroke-linecap="square">
+            <line x1="300" y1="58" x2="300" y2="91" transform="rotate(0 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(30 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(60 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="91" transform="rotate(90 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(120 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(150 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="91" transform="rotate(180 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(210 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(240 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="91" transform="rotate(270 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(300 300 300)"/>
+            <line x1="300" y1="58" x2="300" y2="84" transform="rotate(330 300 300)"/>
+          </g>
+          <g fill="#121212" font-family="Consolas, monospace" font-size="26" font-weight="700" text-anchor="middle">
+            <text x="300" y="135">12</text>
+            <text x="472" y="312">3</text>
+            <text x="300" y="482">6</text>
+            <text x="128" y="312">9</text>
+          </g>
+          <text x="300" y="218" fill="#6C5F4B" font-family="Consolas, monospace" font-size="8"
+                font-weight="700" letter-spacing="3" text-anchor="middle">NAIWA / CAL. 001</text>
+          <g class="tg-hand" id="tgHour">
+            <polygon points="300,300 289,291 300,146 311,291" fill="#121212"/>
+          </g>
+          <g class="tg-hand" id="tgMinute">
+            <polygon points="300,300 292,293 300,106 308,293" fill="#121212"/>
+          </g>
+          <g id="tgSecond">
+            <line x1="300" y1="338" x2="300" y2="80" stroke="#C8332D" stroke-width="3"/>
+            <circle cx="300" cy="338" r="5" fill="#C8332D"/>
+          </g>
+          <circle cx="300" cy="300" r="18" fill="#F6C900" stroke="#121212" stroke-width="7"/>
+          <circle cx="300" cy="300" r="5" fill="#C8332D"/>
+          <rect x="394" y="218" width="17" height="17" fill="#C8332D" transform="rotate(14 402 226)"/>
+          <polygon points="300,48 288,73 312,73" fill="#121212"/>
+          <polygon points="300,552 288,527 312,527" fill="#C8332D"/>
+        </svg>
+      </div>
+    </div>
+
+    <p class="timegate__status">钟摆校准中 / LEFT · RIGHT</p>
+    <button class="timegate__skip" id="timegateSkip" type="button">跳过，直接进入 ↗</button>
+    <button class="timegate__close" id="timegateClose" type="button" aria-label="关闭时间门">×</button>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -581,5 +674,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="timegate.js"></script>
 </body>
 </html>
