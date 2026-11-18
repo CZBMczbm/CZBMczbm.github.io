@@ -617,11 +617,21 @@
       try { item.audio.currentTime = 0; } catch (error) { /* ignore */ }
     });
     try {
-      const promise = voice.audio.play();
-      if (promise) promise.catch(() => {});
+      return voice.audio.play();
     } catch (error) {
-      // 某些浏览器会拦截，Web Audio 路径会接管
+      return Promise.reject(error);
     }
+  };
+
+  const playVoiceBuffer = (voice) => {
+    const buffer = audioBuffers.get(voice.src);
+    if (!audioCtx || !buffer) return;
+    audioCtx.resume().then(() => {
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioCtx.destination);
+      source.start(0);
+    }).catch(() => {});
   };
 
   const showSoundPop = (x, y, text) => {
@@ -644,16 +654,12 @@
     const voice = naiwaVoices[index];
     initNaiwaAudio();
 
-    const buffer = audioBuffers.get(voice.src);
-    if (audioCtx && buffer) {
-      audioCtx.resume().then(() => {
-        const source = audioCtx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioCtx.destination);
-        source.start(0);
-      }).catch(() => playHtmlAudio(voice));
+    // 用户点击时优先用 HTMLAudio（最直接），失败再走 Web Audio。
+    const htmlPlay = playHtmlAudio(voice);
+    if (htmlPlay && typeof htmlPlay.then === 'function') {
+      htmlPlay.catch(() => playVoiceBuffer(voice));
     } else {
-      playHtmlAudio(voice);
+      playVoiceBuffer(voice);
     }
 
     let x = event.clientX;
